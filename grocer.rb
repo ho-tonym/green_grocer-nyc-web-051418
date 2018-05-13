@@ -22,15 +22,15 @@ def apply_coupons(cart, coupons)
       name = coupon[:item].clone
       add_coupon = "#{coupon[:item]}"
 
-      if cart[name] && cart[name][:count] >= coupon[:num] && cart[add_c] == nil
-        cart[add_c] = cart[name].clone
-        cart[add_c][:count] = 1
-        cart[add_c][:price] = coupon[:cost]
+      if cart[name] && cart[name][:count] >= coupon[:num] && cart[add_coupon] == nil
+        cart[add_coupon] = cart[name].clone
+        cart[add_coupon][:count] = 1
+        cart[add_coupon][:price] = coupon[:cost]
           if cart[name][:count] >= coupon[:num]
             cart[name][:count] = cart[name][:count] - coupon[:num]
           end
       elsif cart[name] && cart[name][:count] >= coupon[:num]
-        cart[add_c][:count] += 1
+        cart[add_coupon][:count] += 1
         cart[name][:count] = cart[name][:count] - coupon[:num]
       end
     end
