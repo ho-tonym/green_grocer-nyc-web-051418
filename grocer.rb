@@ -40,7 +40,7 @@ end
 def apply_clearance(cart)
   hash = {}
     cart.each do |key, value|
-      if value[:clearance] == true
+      if value[:clearance]
         discount = (value[:price] * 0.8).round(2)
         hash[key] = value
         hash[key][:price] = discount
