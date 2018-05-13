@@ -50,13 +50,14 @@ end
 def checkout(cart, coupons)
   cart_1 =  consolidate_cart(cart)
   after_coupon = apply_coupons(cart_1, coupons)
-  total = apply_clearance(cart_1)
-  cost = 0
-  total.each {|x, y| cost += (y[:price] * y[:count])}
+  checkout = apply_clearance(after_coupon)
 
+  cost = 0
+  checkout.each do |key, value|
+    cost += value[:price] * value[:count]
+  end
     if cost > 100
       cost = cost*0.9
     end
-
   cost
 end
