@@ -16,24 +16,24 @@ def consolidate_cart(cart)
     items
 end
 
+
 def apply_coupons(cart, coupons)
-  coupons.each do | coupon |
-      name = coupon[:item].clone
-      add_c = "#{coupon[:item]} W/COUPON"
-
-      if cart[name] && cart[name][:count] >= coupon[:num] && cart[add_c] == nil
-        cart[add_c] = cart[name].clone
-        cart[add_c][:count] = 1
-        cart[add_c][:price] = coupon[:cost]
-          if cart[name][:count] >= coupon[:num]
-            cart[name][:count] = (cart[name][:count] - coupon[:num])
-          end
-      elsif cart[name] && (cart[name][:count] >= coupon[:num])
-        cart[add_c][:count] += 1
-        cart[name][:count] = (cart[name][:count] - coupon[:num])
+  coupons.each do |coupon|
+    if cart[coupon[:item]] != nil 
+      if coupon[:num] <= cart[coupon[:item]][:count] 
+        cart[coupon[:item]][:count] = cart[coupon[:item]][:count] - coupon[:num]
+        insert_coupon = "#{coupon[:item]} W/COUPON"
+        if cart[insert_coupon] != nil 
+          cart[insert_coupon][:count] += 1
+        else
+          cart[insert_coupon] = {}
+          cart[insert_coupon][:price] = coupon[:cost]
+          cart[insert_coupon][:count] = 1
+          cart[insert_coupon][:clearance] = cart[coupon[:item]][:clearance]
+        end
       end
-
     end
+  end
   cart
 end
 
@@ -61,6 +61,6 @@ def checkout(cart, coupons)
     if cost > 100
       cost = cost*0.9
     end
-    
+
   cost
 end
