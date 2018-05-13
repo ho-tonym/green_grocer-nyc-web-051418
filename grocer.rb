@@ -20,7 +20,7 @@ end
 def apply_coupons(cart, coupons)
   coupons.each do |coupon|
       name = coupon[:item].clone
-      add_coupon = coupon[:item] + "W/COUPON"
+      add_coupon = coupon[:item] + " W/COUPON"
 
       if cart[name] && cart[name][:count] >= coupon[:num] && cart[add_coupon] == nil
         cart[add_coupon] = cart[name].clone
