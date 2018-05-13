@@ -13,7 +13,7 @@ def consolidate_cart(cart)
       end
     end
   end
-  return  items
+  return items
 end
 
 
@@ -27,11 +27,11 @@ def apply_coupons(cart, coupons)
         cart[add_c][:count] = 1
         cart[add_c][:price] = coupon[:cost]
           if cart[name][:count] >= coupon[:num]
-            cart[name][:count] = (cart[name][:count] - coupon[:num])
+            cart[name][:count] = cart[name][:count] - coupon[:num]
           end
-      elsif cart[name] && (cart[name][:count] >= coupon[:num])
+      elsif cart[name] && cart[name][:count] >= coupon[:num]
         cart[add_c][:count] += 1
-        cart[name][:count] = (cart[name][:count] - coupon[:num])
+        cart[name][:count] = cart[name][:count] - coupon[:num]
       end
     end
   cart
